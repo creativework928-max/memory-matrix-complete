@@ -1,0 +1,43 @@
+export default [
+  {
+    ignores: ["dist/**", "coverage/**", "node_modules/**"],
+  },
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        window: "readonly",
+        document: "readonly",
+        localStorage: "readonly",
+        performance: "readonly",
+        AudioContext: "readonly",
+        webkitAudioContext: "readonly",
+        crypto: "readonly",
+        CSS: "readonly",
+        HTMLElement: "readonly",
+        HTMLButtonElement: "readonly",
+        Event: "readonly",
+        KeyboardEvent: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        matchMedia: "readonly",
+        console: "readonly",
+      },
+    },
+    rules: {
+      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "no-undef": "error",
+      "no-console": "warn",
+      "prefer-const": "error",
+      "no-var": "error",
+      "eqeqeq": ["error", "always"],
+      "curly": ["error", "multi-line"],
+      "object-shorthand": "error",
+      "prefer-template": "error",
+    },
+  },
+];

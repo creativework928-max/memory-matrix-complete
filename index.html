@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Memory Matrix is a futuristic real-time memory puzzle game where you match pairs before time runs out."
+    />
+    <meta name="theme-color" content="#050b18" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>Memory Matrix — Futuristic Memory Puzzle Game</title>
+  </head>
+
+  <body>
+    <div class="app-shell">
+      <div class="ambient-grid" aria-hidden="true"></div>
+      <div class="ambient-orb ambient-orb--one" aria-hidden="true"></div>
+      <div class="ambient-orb ambient-orb--two" aria-hidden="true"></div>
+
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="Memory Matrix home">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>
+            <strong>MEMORY MATRIX</strong>
+            <small>MATCH. REMEMBER. MASTER.</small>
+          </span>
+        </a>
+
+        <div class="header-actions">
+          <button class="icon-button" id="sound-toggle" type="button" aria-label="Enable sound">
+            <span aria-hidden="true">◉</span>
+            <span class="sr-only">Sound</span>
+          </button>
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch theme">
+            <span aria-hidden="true">◐</span>
+            <span class="sr-only">Theme</span>
+          </button>
+          <button class="icon-button" id="settings-button" type="button" aria-label="Open settings">
+            <span aria-hidden="true">⚙</span>
+            <span class="sr-only">Settings</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section id="lobby-view" class="view view--active" aria-labelledby="lobby-title">
+          <div class="hero-panel glass-panel">
+            <div class="eyebrow">NEURAL MEMORY PROTOCOL / 01</div>
+            <h1 id="lobby-title">MEMORY <span>MATRIX</span></h1>
+            <p class="hero-tagline">MATCH. REMEMBER. MASTER.</p>
+            <p class="hero-copy">Train your memory before the clock runs out.</p>
+
+            <div class="difficulty-section">
+              <div class="section-heading">
+                <div>
+                  <span class="eyebrow">SELECT YOUR CHALLENGE</span>
+                  <h2>Choose a matrix</h2>
+                </div>
+              </div>
+
+              <div class="difficulty-grid" id="difficulty-grid"></div>
+
+              <button class="primary-button primary-button--large" id="start-button" type="button">
+                <span>START MISSION</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <div class="lobby-record">
+              <span>PERSONAL BEST</span>
+              <strong id="lobby-best-score">0</strong>
+            </div>
+          </div>
+
+          <aside class="lobby-side">
+            <div class="glass-panel protocol-panel">
+              <div class="panel-icon">⌁</div>
+              <span class="eyebrow">MISSION BRIEF</span>
+              <h2>Read the matrix.</h2>
+              <p>Reveal two nodes at a time. Pair identical signals and keep your focus ahead of the clock.</p>
+              <button class="text-button" id="how-to-play-button" type="button">
+                How to play →
+              </button>
+            </div>
+
+            <div class="glass-panel record-preview">
+              <span class="eyebrow">PERSONAL RECORDS</span>
+              <div class="mini-record-grid">
+                <div>
+                  <span>FASTEST</span>
+                  <strong id="lobby-fastest">—</strong>
+                </div>
+                <div>
+                  <span>BEST COMBO</span>
+                  <strong id="lobby-combo">×0</strong>
+                </div>
+                <div>
+                  <span>WIN RATE</span>
+                  <strong id="lobby-win-rate">0%</strong>
+                </div>
+                <div>
+                  <span>GAMES</span>
+                  <strong id="lobby-games">0</strong>
+                </div>
+              </div>
+              <button class="text-button" id="statistics-button" type="button">
+                Open statistics →
+              </button>
+            </div>
+          </aside>
+        </section>
+
+        <section id="game-view" class="view" aria-labelledby="game-title" hidden>
+          <div class="game-topbar">
+            <div>
+              <span class="eyebrow" id="game-difficulty-label">INITIATE</span>
+              <h2 id="game-title">MEMORY MATRIX</h2>
+            </div>
+
+            <div class="game-actions">
+              <button class="secondary-button" id="pause-button" type="button">PAUSE</button>
+              <button class="secondary-button" id="restart-button" type="button">RESTART</button>
+            </div>
+          </div>
+
+          <section class="hud-grid" aria-label="Game status">
+            <article class="hud-card hud-card--timer">
+              <div class="hud-label">
+                <span>TIME</span>
+                <span id="timer-status" aria-hidden="true">●</span>
+              </div>
+              <strong id="time-value">01:00</strong>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-fill" id="time-progress"></div>
+              </div>
+            </article>
+
+            <article class="hud-card">
+              <span class="hud-label">SCORE</span>
+              <strong id="score-value">0</strong>
+            </article>
+
+            <article class="hud-card">
+              <span class="hud-label">MOVES</span>
+              <strong id="moves-value">0</strong>
+            </article>
+
+            <article class="hud-card">
+              <span class="hud-label">MATCHES</span>
+              <strong id="matches-value">0 / 8</strong>
+            </article>
+
+            <article class="hud-card">
+              <span class="hud-label">COMBO</span>
+              <strong id="combo-value">×0</strong>
+            </article>
+
+            <article class="hud-card">
+              <span class="hud-label">ACCURACY</span>
+              <strong id="accuracy-value">100%</strong>
+            </article>
+          </section>
+
+          <div class="game-layout">
+            <section class="board-shell glass-panel">
+              <div class="board-status" aria-live="polite" id="game-status">
+                Select two cards to find a match.
+              </div>
+              <div
+                class="memory-board"
+                id="memory-board"
+                role="grid"
+                aria-label="Memory card board"
+              ></div>
+            </section>
+
+            <aside class="game-side glass-panel">
+              <span class="eyebrow">ACTIVE PROTOCOL</span>
+              <div class="active-mode">
+                <strong id="active-mode-name">INITIATE</strong>
+                <span id="active-mode-description">Learn the matrix.</span>
+              </div>
+
+              <div class="side-divider"></div>
+
+              <div class="objective">
+                <span class="eyebrow">OBJECTIVE</span>
+                <p>Match every pair before the countdown reaches zero.</p>
+              </div>
+
+              <div class="keyboard-help">
+                <span class="eyebrow">KEYBOARD</span>
+                <div><kbd>P</kbd><span>Pause</span></div>
+                <div><kbd>R</kbd><span>Restart</span></div>
+                <div><kbd>M</kbd><span>Sound</span></div>
+                <div><kbd>Esc</kbd><span>Close modal</span></div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="statistics-view" class="view" aria-labelledby="statistics-title" hidden>
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">LOCAL PERFORMANCE ARCHIVE</span>
+              <h2 id="statistics-title">PERSONAL RECORDS</h2>
+            </div>
+            <button class="secondary-button" id="statistics-back" type="button">BACK</button>
+          </div>
+
+          <div class="stats-highlight-grid">
+            <article class="stat-highlight">
+              <span>BEST SCORE</span>
+              <strong id="stat-best-score">0</strong>
+            </article>
+            <article class="stat-highlight">
+              <span>FASTEST WIN</span>
+              <strong id="stat-fastest">—</strong>
+            </article>
+            <article class="stat-highlight">
+              <span>FEWEST MOVES</span>
+              <strong id="stat-fewest">—</strong>
+            </article>
+            <article class="stat-highlight">
+              <span>BEST COMBO</span>
+              <strong id="stat-best-combo">×0</strong>
+            </article>
+          </div>
+
+          <div class="statistics-layout">
+            <section class="glass-panel records-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="eyebrow">LAST 20 RUNS</span>
+                  <h3>Mission history</h3>
+                </div>
+                <button class="danger-button" id="clear-records-button" type="button">
+                  CLEAR DATA
+                </button>
+              </div>
+              <div class="records-table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>MODE</th>
+                      <th>RESULT</th>
+                      <th>SCORE</th>
+                      <th>TIME</th>
+                      <th>MOVES</th>
+                      <th>ACCURACY</th>
+                    </tr>
+                  </thead>
+                  <tbody id="records-body"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <aside class="glass-panel stat-summary">
+              <span class="eyebrow">CAREER SIGNAL</span>
+              <div class="summary-stat">
+                <span>GAMES PLAYED</span>
+                <strong id="stat-games">0</strong>
+              </div>
+              <div class="summary-stat">
+                <span>GAMES WON</span>
+                <strong id="stat-wins">0</strong>
+              </div>
+              <div class="summary-stat">
+                <span>WIN RATE</span>
+                <strong id="stat-win-rate">0%</strong>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>MEMORY MATRIX // LOCAL-FIRST // NO TRACKING</span>
+        <span>© 2026</span>
+      </footer>
+    </div>
+
+    <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <div id="countdown-overlay" class="countdown-overlay" hidden aria-live="assertive">
+      <span id="countdown-value">3</span>
+    </div>
+
+    <dialog id="result-modal" class="modal">
+      <div class="modal-glow" aria-hidden="true"></div>
+      <div class="modal-content">
+        <span class="eyebrow" id="result-eyebrow">MISSION COMPLETE</span>
+        <h2 id="result-title">MEMORY MASTER</h2>
+        <p id="result-subtitle">ALL PAIRS MATCHED</p>
+
+        <div id="new-record" class="new-record" hidden>★ NEW PERSONAL RECORD ★</div>
+
+        <div class="result-grid">
+          <div><span>SCORE</span><strong id="result-score">0</strong></div>
+          <div><span>TIME</span><strong id="result-time">00:00</strong></div>
+          <div><span>MOVES</span><strong id="result-moves">0</strong></div>
+          <div><span>ACCURACY</span><strong id="result-accuracy">0%</strong></div>
+          <div><span>BEST COMBO</span><strong id="result-combo">×0</strong></div>
+          <div><span>TIME BONUS</span><strong id="result-time-bonus">0</strong></div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="primary-button" id="result-play-again" type="button">PLAY AGAIN</button>
+          <button class="secondary-button" id="result-statistics" type="button">STATISTICS</button>
+          <button class="text-button" id="result-change-difficulty" type="button">
+            Change difficulty
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="settings-modal" class="modal modal--settings">
+      <div class="modal-content">
+        <div class="modal-heading">
+          <div>
+            <span class="eyebrow">SYSTEM CONFIGURATION</span>
+            <h2>SETTINGS</h2>
+          </div>
+          <button class="icon-button modal-close" data-close-modal="settings-modal" type="button">
+            ×
+          </button>
+        </div>
+
+        <div class="settings-list">
+          <label class="setting-row">
+            <span>
+              <strong>Sound effects</strong>
+              <small>Enable synthesized game feedback.</small>
+            </span>
+            <input id="settings-sound" type="checkbox" />
+          </label>
+
+          <label class="setting-row">
+            <span>
+              <strong>Reduced effects</strong>
+              <small>Use less decorative animation and particles.</small>
+            </span>
+            <input id="settings-reduced-effects" type="checkbox" />
+          </label>
+
+          <div class="setting-row setting-row--select">
+            <span>
+              <strong>Theme</strong>
+              <small>Choose the visual system.</small>
+            </span>
+            <select id="settings-theme">
+              <option value="neon">Neon Night</option>
+              <option value="light">Cyber Light</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <button class="secondary-button" id="settings-how-to-play" type="button">
+            HOW TO PLAY
+          </button>
+          <button class="danger-button" id="settings-clear-data" type="button">
+            CLEAR LOCAL DATA
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="how-to-play-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-heading">
+          <div>
+            <span class="eyebrow">MISSION MANUAL</span>
+            <h2>HOW TO PLAY</h2>
+          </div>
+          <button class="icon-button modal-close" data-close-modal="how-to-play-modal" type="button">
+            ×
+          </button>
+        </div>
+
+        <ol class="instruction-list">
+          <li><strong>Choose a difficulty.</strong> Each mode changes the matrix size and timer.</li>
+          <li><strong>Start the mission.</strong> A short countdown gives you a clear launch point.</li>
+          <li><strong>Reveal two cards.</strong> Search for identical symbols.</li>
+          <li><strong>Build combos.</strong> Consecutive matches increase your combo bonus.</li>
+          <li><strong>Protect your time.</strong> Mistakes break your combo and cost points.</li>
+          <li><strong>Complete the matrix.</strong> Match every pair before time expires.</li>
+        </ol>
+      </div>
+    </dialog>
+
+    <dialog id="pause-modal" class="modal">
+      <div class="modal-content modal-content--center">
+        <span class="eyebrow">SYSTEM PAUSED</span>
+        <h2>MISSION HOLD</h2>
+        <p>Your timer is paused and the matrix is locked.</p>
+        <div class="modal-actions">
+          <button class="primary-button" id="resume-button" type="button">RESUME</button>
+          <button class="secondary-button" id="pause-restart" type="button">RESTART</button>
+          <button class="text-button" id="pause-exit" type="button">Exit mission</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="confirm-modal" class="modal modal--small">
+      <div class="modal-content modal-content--center">
+        <span class="eyebrow">CONFIRM ACTION</span>
+        <h2 id="confirm-title">Restart mission?</h2>
+        <p id="confirm-message">Current progress will be discarded.</p>
+        <div class="modal-actions">
+          <button class="danger-button" id="confirm-yes" type="button">CONFIRM</button>
+          <button class="secondary-button" id="confirm-no" type="button">CANCEL</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

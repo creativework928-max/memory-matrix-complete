@@ -1,0 +1,54 @@
+file:1
+
+Chatgpt:
+https://chatgpt.com/share/6ab25b15-1f9c-83ea-b860-b28191ac04af
+
+
+file:2
+
+py -3.14 -m venv .venv
+
+.\.venv\Scripts\Activate.ps1
+
+npm install
+
+
+
+
+
+Chatgpt:
+1. https://chatgpt.com/share/6ab22d92-0ee0-83ea-b4bb-1c37d3eb7813
+
+2. https://chatgpt.com/share/6ab24b16-bdd4-83ea-9594-1f86c89e8d02
+
+3. https://chatgpt.com/share/6ab24b48-2d60-83ea-9cd8-ea7190d21f90
+
+
+
+
+file:3
+
+How to run
+
+Extract the ZIP, open a terminal inside memory-matrix, then run:
+
+npm install
+npm run dev
+
+For production:
+
+npm run build
+npm run preview
+
+For tests:
+
+npm test
+npm run test:watch
+npm run test:coverage
+
+For linting:
+
+npm run lint
+
+Chatgpt:
+https://chatgpt.com/share/6ab37bf6-9108-83ea-88ab-ed9f113afe6a
