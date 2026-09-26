@@ -52,3 +52,4 @@ npm run lint
 
 Chatgpt:
 https://chatgpt.com/share/6ab37bf6-9108-83ea-88ab-ed9f113afe6a
+https://chatgpt.com/share/6ab7928e-0700-83ea-8353-a3af4b88b2fa
