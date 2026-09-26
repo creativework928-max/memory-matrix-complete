@@ -1,0 +1,16 @@
+{
+  "name": "Memory Matrix",
+  "short_name": "Memory Matrix",
+  "description": "A futuristic real-time memory puzzle game.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#050b18",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
