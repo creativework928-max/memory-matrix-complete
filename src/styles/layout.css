@@ -1,0 +1,162 @@
+body {
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.14), transparent 30%),
+    radial-gradient(circle at 85% 80%, rgba(34, 211, 238, 0.1), transparent 30%),
+    linear-gradient(135deg, var(--color-void), var(--color-background-2));
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+
+.ambient-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.ambient-orb {
+  position: fixed;
+  z-index: -2;
+  width: 30rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.ambient-orb--one {
+  top: 4%;
+  left: -15rem;
+  background: var(--color-primary);
+}
+
+.ambient-orb--two {
+  right: -15rem;
+  bottom: 5%;
+  background: var(--color-cyan);
+}
+
+.main-content {
+  width: min(var(--content-width), calc(100% - 32px));
+  margin: 0 auto;
+  flex: 1;
+  padding: 34px 0 60px;
+}
+
+.view {
+  display: none;
+}
+
+.view--active {
+  display: block;
+}
+
+.glass-panel {
+  border: 1px solid var(--color-border);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--color-surface) 90%, transparent),
+    color-mix(in srgb, var(--color-surface-2) 72%, transparent)
+  );
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+}
+
+.hero-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  padding: clamp(30px, 5vw, 70px);
+  min-height: 650px;
+}
+
+.hero-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 75% 15%, rgba(139, 92, 246, 0.16), transparent 26%),
+    radial-gradient(circle at 25% 80%, rgba(34, 211, 238, 0.1), transparent 24%);
+}
+
+.hero-panel > * {
+  position: relative;
+}
+
+#lobby-view {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 22px;
+  align-items: stretch;
+}
+
+#lobby-view:not(.view--active) {
+  display: none;
+}
+
+.lobby-side {
+  display: grid;
+  gap: 22px;
+}
+
+.protocol-panel,
+.record-preview {
+  border-radius: var(--radius-lg);
+  padding: 30px;
+}
+
+.page-heading,
+.game-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  gap: 22px;
+}
+
+.board-shell {
+  border-radius: var(--radius-xl);
+  padding: clamp(16px, 3vw, 30px);
+  min-width: 0;
+}
+
+.game-side {
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.site-footer {
+  width: min(var(--content-width), calc(100% - 32px));
+  margin: auto auto 0;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}

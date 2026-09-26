@@ -1,0 +1,47 @@
+.site-header {
+  width: min(var(--content-width), calc(100% - 32px));
+  margin: 0 auto;
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(103, 232, 249, 0.35);
+  border-radius: 12px;
+  color: var(--color-cyan-bright);
+  background: rgba(34, 211, 238, 0.06);
+  box-shadow: var(--glow-cyan);
+  font-size: 1.2rem;
+}
+
+.brand strong {
+  display: block;
+  font-size: 0.94rem;
+  letter-spacing: 0.18em;
+}
+
+.brand small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-text-secondary);
+  font-size: 0.59rem;
+  letter-spacing: 0.16em;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}

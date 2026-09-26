@@ -1,0 +1,188 @@
+@media (max-width: 1100px) {
+  #lobby-view {
+    grid-template-columns: 1fr;
+  }
+
+  .lobby-side {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hud-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .game-side {
+    position: static;
+  }
+
+  .statistics-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .main-content {
+    width: min(100% - 20px, var(--content-width));
+    padding-top: 18px;
+  }
+
+  .site-header {
+    width: min(100% - 20px, var(--content-width));
+  }
+
+  .brand strong {
+    font-size: 0.8rem;
+  }
+
+  .brand small {
+    font-size: 0.5rem;
+  }
+
+  .hero-panel {
+    min-height: auto;
+    padding: 30px 20px 100px;
+  }
+
+  .hero-panel h1 {
+    font-size: clamp(3rem, 18vw, 6rem);
+  }
+
+  .difficulty-section {
+    margin-top: 45px;
+  }
+
+  .difficulty-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .difficulty-card {
+    min-height: 135px;
+  }
+
+  .lobby-record {
+    right: 20px;
+    bottom: 22px;
+  }
+
+  .lobby-side {
+    grid-template-columns: 1fr;
+  }
+
+  .hud-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hud-card--timer {
+    grid-column: span 2;
+  }
+
+  .game-topbar {
+    align-items: flex-start;
+  }
+
+  .game-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .game-actions button {
+    min-height: 40px;
+    padding-inline: 12px;
+  }
+
+  .board-shell {
+    padding: 12px;
+  }
+
+  .memory-board {
+    gap: 6px;
+  }
+
+  .card-name,
+  .card-category {
+    display: none;
+  }
+
+  .card-symbol {
+    font-size: clamp(1.25rem, 7vw, 2.8rem);
+  }
+
+  .game-side {
+    display: none;
+  }
+
+  .stats-highlight-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .settings-actions {
+    flex-direction: column;
+  }
+
+  .settings-actions button {
+    width: 100%;
+  }
+
+  .site-footer {
+    width: min(100% - 20px, var(--content-width));
+  }
+}
+
+@media (max-width: 450px) {
+  .header-actions {
+    gap: 4px;
+  }
+
+  .icon-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hud-grid {
+    gap: 6px;
+  }
+
+  .hud-card {
+    padding: 12px;
+    min-height: 78px;
+  }
+
+  .hud-card strong {
+    font-size: 1rem;
+  }
+
+  .result-grid {
+    gap: 7px;
+  }
+
+  .result-grid div {
+    padding: 12px 9px;
+  }
+
+  .modal-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+
+  .page-heading {
+    align-items: flex-start;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
